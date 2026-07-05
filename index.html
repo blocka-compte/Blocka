@@ -20,6 +20,185 @@ body{
     overflow-x:hidden;
 }
 
+.box{
+    max-width:350px;
+}
+
+.box input,
+.box textarea{
+    width:100%;
+    padding:10px;
+    margin-bottom:10px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:14px;
+    outline:none;
+    box-sizing:border-box;
+}
+
+.row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 0;
+    font-size:16px;
+}
+
+/* switch */
+.switch{
+    position:relative;
+    width:50px;
+    height:26px;
+}
+
+.switch input{
+    display:none;
+}
+
+.slider{
+    position:absolute;
+    inset:0;
+    background:#ccc;
+    border-radius:30px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.slider:before{
+    content:"";
+    position:absolute;
+    height:20px;
+    width:20px;
+    left:3px;
+    top:3px;
+    background:#fff;
+    border-radius:50%;
+    transition:.3s;
+}
+
+input:checked + .slider{
+    background:#2d2d2d;
+}
+
+input:checked + .slider:before{
+    transform:translateX(24px);
+}
+
+/* DARK MODE */
+body.dark{
+    background:#1e1e1e;
+    color:#fff;
+}
+
+.exit-btn{
+    width:100%;
+    max-width:200px;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#d9534f;
+    color:#fff;
+    cursor:pointer;
+    font-size:16px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    transition:.2s;
+}
+
+.exit-btn:hover{
+    background:#c9302c;
+    transform:scale(1.05);
+}
+
+#news{
+    width:100%;
+    box-sizing:border-box;
+}
+
+.news-card{
+    width:100%;
+    box-sizing:border-box;
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:15px;
+    margin-bottom:15px;
+}
+
+.news-header{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:10px;
+}
+
+.news-header i{
+    font-size:20px;
+}
+
+.news-header h3{
+    margin:0;
+    font-size:18px;
+    font-weight:700;
+}
+
+.desc{
+    margin:0 0 10px;
+}
+
+.date{
+    margin:0;
+    font-size:13px;
+    color:#888;
+}
+
+body.dark
+body.dark .topbar{
+    background:#111;
+}
+
+body.dark .sidebar{
+    background:#000;
+}
+
+body.dark .box{
+    background:#2a2a2a;
+    color:#fff;
+}
+
+body.dark .page h1{
+    color:#fff;
+}
+
+.box textarea{
+    height:130px;
+    resize:none;
+}
+
+.counter{
+    text-align:right;
+    font-size:12px;
+    color:#666;
+    margin-top:-8px;
+    margin-bottom:10px;
+}
+
+.box button{
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:6px;
+    background:#2d2d2d;
+    color:#fff;
+    cursor:pointer;
+}
+
+.box button:hover{
+    background:#444;
+}
+
 /* Top Bar */
 
 .topbar{
@@ -93,6 +272,8 @@ body{
     z-index:998;
 }
 
+
+
 /* Pages */
 
 .page{
@@ -159,6 +340,11 @@ body{
     Feedback
 </a>
 
+<a href="#" onclick="showPage('donate')">
+    <i class="fa-solid fa-circle-dollar-to-slot"></i>
+    Donate
+</a>
+
 <a href="#" onclick="showPage('logout')">
     <i class="fa-solid fa-right-from-bracket"></i>
     Logout
@@ -176,32 +362,120 @@ body{
 </div>
 
 <!-- News -->
-
 <div id="news" class="page">
     <h1><i class="fa-solid fa-newspaper"></i> News</h1>
-    <p>Latest news and updates will appear here.</p>
+    <p style="margin-bottom:20px;">Latest news and updates will appear here.</p>
+
+    <div class="news-card">
+        <div class="news-header">
+            <i class="fa-solid fa-rocket"></i>
+            <h3>New Update</h3>
+        </div>
+        <p class="desc">We improved UI and performance.</p>
+        <p class="date">2026-07-05</p>
+    </div>
+
+    <div class="news-card">
+        <div class="news-header">
+            <i class="fa-solid fa-bolt"></i>
+            <h3>Feature Added</h3>
+        </div>
+        <p class="desc">Dark mode is now available.</p>
+        <p class="date">2026-07-05</p>
+    </div>
+
+    <div class="news-card">
+        <div class="news-header">
+            <i class="fa-solid fa-fire"></i>
+            <h3>Coming Soon</h3>
+        </div>
+        <p class="desc">More updates are on the way.</p>
+        <p class="date">2026-07-05</p>
+    </div>
 </div>
 
 <!-- Settings -->
 
 <div id="settings" class="page">
+
     <h1><i class="fa-solid fa-gear"></i> Settings</h1>
-    <p>Manage your application settings here.</p>
+    <p style="margin-bottom:15px;">Manage site settings here.</p>
+
+    <div class="box">
+
+        <div class="row">
+            <span>Dark Mode</span>
+
+            <label class="switch">
+                <input type="checkbox" id="toggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+    </div>
+
 </div>
 
 <!-- Feedback -->
-
 <div id="feedback" class="page">
     <h1><i class="fa-solid fa-comment-dots"></i> Feedback</h1>
-    <p>Send us your feedback and suggestions.</p>
+
+    <p style="margin-bottom:15px;">
+    Send us your feedback and suggestions.
+</p>
+
+    <div class="box">
+
+        <input type="text" placeholder="Name">
+        <input type="email" placeholder="Email">
+
+        <textarea id="msg" maxlength="400" placeholder="Write your message..."></textarea>
+
+        <div class="counter" id="counter">0/400</div>
+
+        <button>Send</button>
+
+    </div>
+</div>
+
+<!-- Donate -->
+
+<div id="donate" class="page">
+
+    <h1>
+        <i class="fa-solid fa-circle-dollar-to-slot"></i>
+        Donate
+    </h1>
+
+    <p style="margin-bottom:15px;">
+    Support the Game <i class="fa-solid fa-heart"></i>
+</p>
+    
+</button>
+
+    <div class="box">
+
+        <input type="number" placeholder="Enter amount">
+
+        <button onclick="alert('Thank you ❤️')">
+            <i class="fa-solid fa-heart"></i>
+            Donate
+        </button>
+
+    </div>
+
 </div>
 
 <!-- Logout -->
 
 <div id="logout" class="page">
     <h1><i class="fa-solid fa-right-from-bracket"></i> Logout</h1>
-    <p>You have been logged out successfully.</p>
-</div>
+    <p style="margin-bottom:15px;">Click the button below to exit the site.</p>
+
+<button class="exit-btn" onclick="window.location.href='https://www.google.com'">
+    <i class="fa-solid fa-right-from-bracket"></i>
+    Exit
+</button>
 
 <script>
 const sidebar = document.getElementById("sidebar");
@@ -217,6 +491,13 @@ function closeMenu(){
     overlay.style.display = "none";
 }
 
+const msg = document.getElementById("msg");
+const counter = document.getElementById("counter");
+
+msg.addEventListener("input", () => {
+    counter.textContent = msg.value.length + "/400";
+});
+
 function showPage(id){
     document.querySelectorAll(".page").forEach(page=>{
         page.classList.remove("active");
@@ -226,6 +507,13 @@ function showPage(id){
 
     closeMenu();
 }
+
+const toggle = document.getElementById("toggle");
+
+toggle.addEventListener("change", function () {
+    document.body.classList.toggle("dark", this.checked);
+});
+
 </script>
 
 </body>
