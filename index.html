@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+emailjs.init("TePCFeYC3SHgmSZrX");
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blocka</title>
@@ -372,6 +377,7 @@ body.dark .page h1{
             <h3>New Update</h3>
         </div>
         <p class="desc">We improved UI and performance.</p>
+       <img src="Photo1.png" alt="Photo1" class="Photo1"> 
         <p class="date">2026-07-05</p>
     </div>
 
@@ -381,6 +387,7 @@ body.dark .page h1{
             <h3>Feature Added</h3>
         </div>
         <p class="desc">Dark mode is now available.</p>
+        <img src="Photo2.png" alt="Photo2" class="Photo2">
         <p class="date">2026-07-05</p>
     </div>
 
@@ -390,6 +397,7 @@ body.dark .page h1{
             <h3>Coming Soon</h3>
         </div>
         <p class="desc">More updates are on the way.</p>
+        <img src="Photo3.png" alt="Photo3" class="Photo3">
         <p class="date">2026-07-05</p>
     </div>
 </div>
@@ -418,24 +426,31 @@ body.dark .page h1{
 
 <!-- Feedback -->
 <div id="feedback" class="page">
+
     <h1><i class="fa-solid fa-comment-dots"></i> Feedback</h1>
 
     <p style="margin-bottom:15px;">
-    Send us your feedback and suggestions.
-</p>
+        Send us your feedback and suggestions.
+    </p>
 
     <div class="box">
 
-        <input type="text" placeholder="Name">
-        <input type="email" placeholder="Email">
+        <input type="text" id="name" placeholder="Name">
+
+        <input type="email" id="email" placeholder="Email">
 
         <textarea id="msg" maxlength="400" placeholder="Write your message..."></textarea>
 
         <div class="counter" id="counter">0/400</div>
 
-        <button>Send</button>
+        <p id="cooldown" style="font-size:13px;color:#999;margin:8px 0;"></p>
+
+        <button id="sendBtn" onclick="sendFeedback()">
+            Send
+        </button>
 
     </div>
+
 </div>
 
 <!-- Donate -->
@@ -448,23 +463,21 @@ body.dark .page h1{
     </h1>
 
     <p style="margin-bottom:15px;">
-    Support the Game <i class="fa-solid fa-heart"></i>
-</p>
-    
-</button>
+        Support the Game <i class="fa-solid fa-heart"></i>
+    </p>
 
     <div class="box">
 
-        <input type="number" placeholder="Enter amount">
-
-        <button onclick="alert('Thank you ❤️')">
-            <i class="fa-solid fa-heart"></i>
-            Donate
+        <button onclick="window.open('https://www.paypal.com/donate/ضع_رابط_التبرع_هنا','_blank')">
+            <i class="fa-brands fa-paypal"></i>
+            PayPal
         </button>
 
     </div>
 
 </div>
+
+
 
 <!-- Logout -->
 
@@ -514,6 +527,98 @@ toggle.addEventListener("change", function () {
     document.body.classList.toggle("dark", this.checked);
 });
 
+</script>
+
+<script>
+msg.addEventListener("input", () => {
+    counter.textContent = msg.value.length + "/400";
+});
+
+const COOLDOWN = 20 * 60 * 1000;
+
+function updateCooldown(){
+
+    const last = localStorage.getItem("feedbackCooldown");
+    const btn = document.getElementById("sendBtn");
+    const txt = document.getElementById("cooldown");
+
+    if(!last){
+        btn.disabled = false;
+        txt.innerHTML = "";
+        return;
+    }
+
+    const left = COOLDOWN - (Date.now() - Number(last));
+
+    if(left <= 0){
+        localStorage.removeItem("feedbackCooldown");
+        btn.disabled = false;
+        txt.innerHTML = "";
+        return;
+    }
+
+    btn.disabled = true;
+
+    const m = Math.floor(left / 60000);
+    const s = Math.floor((left % 60000) / 1000);
+
+    txt.innerHTML = "Cooldown: " + m + "m " + s + "s";
+
+    setTimeout(updateCooldown,1000);
+}
+
+updateCooldown();
+
+function sendFeedback(){
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("msg").value.trim();
+
+    const emailRegex=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if(name==""){
+        alert("Enter your name");
+        return;
+    }
+
+    if(!emailRegex.test(email)){
+        alert("Invalid email");
+        return;
+    }
+
+    if(message==""){
+        alert("Write your message");
+        return;
+    }
+
+    emailjs.send("service_5u14bbs","template_dgu9bca",{
+
+        name:name,
+        email:email,
+        message:message
+    }).then(function(){
+
+        alert("Feedback sent successfully!");
+
+        localStorage.setItem("feedbackCooldown",Date.now());
+
+        document.getElementById("name").value="";
+        document.getElementById("email").value="";
+        document.getElementById("msg").value="";
+        counter.innerHTML="0/400";
+
+        updateCooldown();
+
+    },function(error){
+
+        alert("Failed to send.");
+
+        console.log(error);
+
+    });
+
+}
 </script>
 
 </body>
