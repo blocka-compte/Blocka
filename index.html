@@ -276,16 +276,18 @@ function showPage(page) {
 
 /* ✅ LOGIN CHECK */
 window.onload = function () {
-  const email = localStorage.getItem("userEmail");
+
+  const user = JSON.parse(localStorage.getItem("user"));
   const loginBtn = document.getElementById("loginBtn");
 
-  if (email) {
+  if (user) {
     loginBtn.innerHTML = `
       <svg class="icon"><use href="#user"/></svg>
       Profile
     `;
     loginBtn.href = "profile.html";
   }
+
 };
 </script>
 
