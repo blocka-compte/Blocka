@@ -126,6 +126,78 @@ body.dark{
     transform:scale(1.05);
 }
 
+/* ---------- Home ---------- */
+
+.home-card{
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:20px;
+    margin-bottom:20px;
+}
+
+.home-card h2{
+    margin-bottom:10px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.home-card p{
+    font-size:14px;
+    line-height:1.6;
+    color:#555;
+}
+
+.home-card iframe{
+    width:100%;
+    height:220px;
+    border:none;
+    border-radius:10px;
+}
+
+/* ---------- Footer ---------- */
+
+.home-footer{
+    margin-top:30px;
+    padding:20px;
+    border-top:1px solid #ddd;
+    text-align:center;
+}
+
+.home-footer h2{
+    font-size:18px;
+    margin-bottom:15px;
+}
+
+.social-links{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:15px;
+    margin-bottom:15px;
+}
+
+.social-links a{
+    text-decoration:none;
+    color:#333;
+    font-size:15px;
+    font-weight:bold;
+    transition:0.2s;
+}
+
+.social-links a i{
+    margin-right:6px;
+}
+
+.social-links a:hover{
+    opacity:0.7;
+}
+
+.copyright{
+    font-size:12px;
+    color:#777;
+}
+  
 #news{
     width:100%;
     box-sizing:border-box;
@@ -373,6 +445,51 @@ body.dark .page h1{
 <div id="home" class="page active">
     <h1><i class="fa-solid fa-house"></i> Home</h1>
     <p>Welcome to the Home page.</p>
+<div class="home-card">
+        <h2>Welcome to Blocka</h2>
+
+        <p>
+            Blocka is a multiplayer game where players can explore, compete,
+            and enjoy exciting adventures together. We are constantly improving
+            the game with new features, updates, and events for everyone.
+        </p>
+    </div>
+
+    <div class="home-card">
+        <h2>Official Trailer</h2>
+
+        <!-- Replace VIDEO_ID with your YouTube video ID -->
+        <iframe
+            src="https://www.youtube.com/embed/VIDEO_ID"
+            title="Blocka Trailer"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <div class="home-card">
+        <h2>Why Play Blocka?</h2>
+
+        <p>
+            Every update makes Blocka even better. Discover new gameplay,
+            explore fresh content, and join our growing community. Your
+            feedback helps shape the future of the game.
+        </p>
+    </div>
+
+    <footer class="home-footer">
+        <h2>Follow Blocka</h2>
+
+        <div class="social-links">
+            <a href="https://www.youtube.com/@Blocka.Compte"><i class="fa-brands fa-youtube"></i> YouTube</a>
+            <a href="https://x.com/Blockacompte"><i class="fa-brands fa-x-twitter"></i> Twitter</a>
+            <a href="https://www.instagram.com/blocka.compte"><i class="fa-brands fa-instagram"></i> Instagram</a>
+            <a href="https://www.tiktok.com/@blocka.compte"></i> TikTok</a>
+            <a href="https://www.facebook.com/share/18xoq5phLY/"><i class="fa-brands fa-facebook"></i> Facebook</a>
+            <a href="https://discord.gg/zcaRfaquG"><i class="fa-brands fa-discord"></i> Discord</a>
+        </div>
+
+        <p class="copyright">© 2026 Blocka. All rights reserved.</p>
+    </footer>
 </div>
 
 <!-- News -->
